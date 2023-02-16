@@ -30,7 +30,6 @@
             <artifactId>guice</artifactId>
             <version>4.0</version>
         </dependency>
-    </dependencies>
 
 <!-- https://mvnrepository.com/artifact/junit/junit -->
 <dependency>
@@ -39,4 +38,7 @@
     <version>4.13.2</version>
     <scope>test</scope>
 </dependency>
+    </dependencies>
+
+
 </project>
