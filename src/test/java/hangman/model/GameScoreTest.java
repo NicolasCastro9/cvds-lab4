@@ -4,112 +4,130 @@ import org.junit.Test;
 public class GameScoreTest{
 
 
-    /** CASO_1 ORIGINALSCORE: 
-     1	                               C < 0		                      Incorrecto
-     2		                           I < 0	                          Incorrecto
-     3	                      C >= 0	&&    I = 0	                            100
-     4	                      C >= 0	&&    I > 0 && LI <= 10	       100 - (10 * I)
-     5	                      C > 0	    &&    I > 10	                        0
-     */
-
+    /** 
+     * CASO_1 ORIGINALSCORE: 
+    **/
+    
     @Test
-    public void ShouldCalculateOriginal1() throws ModelException {
+    public void When_OriginalScore_has_correctCount_is_negative () throws ModelException {
         GameScore puntaje= new OriginalScore();
-        int score= puntaje.calculateScore(2,8);
-        Assert.assertEquals(score,20);
+        try{
+            int score= puntaje.calculateScore(-2,8);
+        }     
+        catch(Exception e){}
     }
     @Test
-    public void ShouldCalculateOriginal12() throws ModelException {
+    public void When_OriginalScore_has_incorrectCount_is_negative () throws ModelException {
         GameScore puntaje= new OriginalScore();
-        int score= puntaje.calculateScore(4,3);
-        Assert.assertEquals(score,70);
+        try{
+            int score= puntaje.calculateScore(2,-8);
+        }     
+        catch(Exception e){}
     }
     @Test
-    public void ShouldCalculateOriginal3() throws ModelException {
+    public void When_OriginalScore_has_incorrectCount_is_zero () throws ModelException {
+        GameScore puntaje= new OriginalScore();
+        int score= puntaje.calculateScore(3,0);
+        Assert.assertEquals(score,100);
+    }
+    @Test
+    public void When_OriginalScore_has_incorrectCount_is_between_one_and_ten () throws ModelException {
         GameScore puntaje= new OriginalScore();
         int score= puntaje.calculateScore(6,10);
         Assert.assertEquals(score,0);
     }
     @Test
-    public void ShouldCalculateOriginal4() throws ModelException {
+    public void When_OriginalScore_has_incorrectCount_is_greater_than_ten () throws ModelException {
         GameScore puntaje= new OriginalScore();
-        int score= puntaje.calculateScore(9,0);
-        Assert.assertEquals(score,100);
-    }
-
-
-    /** CASO_2 BONUSCORE
-    1	                             C < 0 		                         Incorrecto
-    2		                         I < 0 	                             Incorrecto
-    3	                         C >= 0  && I = 0	                         LC * 10
-    4	                         C > 0  && I < LC 	                     (LC* 10) - (LI * 5)
-    5	                         LC > 0 &&	LI >= LC * 2 	                  0
-    */
-
-
-
-    @Test
-    public void ShouldCalculateBonus1() throws ModelException {
-        GameScore game = new BonusScore();
-        int score = game.calculateScore(5,2);
-        Assert.assertEquals(score,40);
-    }
-    @Test
-    public void ShouldCalculateBonus2() throws ModelException {
-        GameScore game = new BonusScore();
-        int score = game.calculateScore(10,10);
-        Assert.assertEquals(score,50);
-    }
-    @Test
-    public void ShouldCalculateBonus3() throws ModelException {
-        GameScore game = new BonusScore();
-        int score = game.calculateScore(20,0);
-        Assert.assertEquals(score,200);
-    }
-    @Test
-    public void ShouldCalculateBonus4() throws ModelException {
-        GameScore game = new BonusScore();
-        int score = game.calculateScore(10,20);
+        int score= puntaje.calculateScore(1,11);
         Assert.assertEquals(score,0);
     }
 
 
-    /** CASO_3 POWERSCORE
-    1	                              C< 0 		                        Incorrecto
-    2		                          I< 0	                            Incorrecto
-    3	                       C > 0 && I = 0	                         5^i
-    4	                       C = 0 && I > 0 	                         0
-    5	                       C >= 4 && I = 0	                        500
-    6	                       C > 1 && I > 1 	                    5^i - 8*LI 
-    */
+
+    /** 
+     * CASO_2 BonusScore
+    **/
+
+    @Test
+    public void When_BonusScore_has_correctCount_is_negative () throws ModelException {
+        GameScore puntaje= new BonusScore();
+        try{
+            int score= puntaje.calculateScore(-2,8);
+        }     
+        catch(Exception e){}
+    }
+    @Test
+    public void When_BonusScore_has_incorrectCount_is_negative () throws ModelException {
+        GameScore puntaje= new BonusScore();
+        try{
+            int score= puntaje.calculateScore(2,-8);
+        }     
+        catch(Exception e){}
+    }
+    @Test
+    public void When_BonusScore_has_incorrectCount_is_zero () throws ModelException {
+        GameScore puntaje= new BonusScore();
+        int score= puntaje.calculateScore(3,0);
+        Assert.assertEquals(score,30);
+    }
+    @Test
+    public void When_BonusScore_has_incorrectCount_is_between_one_and_ten () throws ModelException {
+        GameScore puntaje= new BonusScore();
+        int score= puntaje.calculateScore(3,5);
+        Assert.assertEquals(score,5);
+    }
+    @Test
+    public void When_BonusScore_has_incorrectCount_is_greater_than_ten () throws ModelException {
+        GameScore puntaje= new BonusScore();
+        int score= puntaje.calculateScore(1,11);
+        Assert.assertEquals(score,0);
+    }
+
+
+    /** 
+     * CASO_3 POWERSCORE
+    **/
 
 
     @Test
-    public void ShouldCalculatePower1() throws ModelException {
-        GameScore game = new PowerScore();
-        int score = game.calculateScore(3,0);
+    public void When_PowerScore_has_correctCount_is_negative () throws ModelException {
+        GameScore puntaje= new PowerScore();
+        try{
+            int score= puntaje.calculateScore(-2,8);
+        }     
+        catch(Exception e){}
+    }
+    @Test
+    public void When_PowerScore_has_incorrectCount_is_negative () throws ModelException {
+        GameScore puntaje= new PowerScore();
+        try{
+            int score= puntaje.calculateScore(2,-8);
+        }     
+        catch(Exception e){}
+    }
+    @Test
+    public void When_PowerScore_has_incorrectCount_is_zero_and_correctCount_is_greater_than_zero () throws ModelException {
+        GameScore puntaje= new PowerScore();
+        int score= puntaje.calculateScore(3,0);
         Assert.assertEquals(score,155);
     }
     @Test
-    public void ShouldCalculatePower2() throws ModelException {
-        GameScore game = new PowerScore();
-        int score = game.calculateScore(4,2);
-        Assert.assertEquals(score,500);
-    }
-    @Test
-    public void ShouldCalculatePower3() throws ModelException {
-        GameScore game = new PowerScore();
-        int score = game.calculateScore(0,10);
+    public void When_PowerScore_has_correctCount_is_zero_and_incorrectCount_is_greater_than_zero () throws ModelException {
+        GameScore puntaje= new PowerScore();
+        int score= puntaje.calculateScore(0,5);
         Assert.assertEquals(score,0);
     }
     @Test
-    public void ShouldCalculatePower4() throws ModelException {
-        GameScore game = new PowerScore();
-        int score = game.calculateScore(2,3);
-        Assert.assertEquals(score,6);
+    public void When_PowerScore_has_incorrectCount_is_zero_and_correctCount_is_greater_than_four () throws ModelException {
+        GameScore puntaje= new PowerScore();
+        int score= puntaje.calculateScore(4,0);
+        Assert.assertEquals(score,500);
     }
-
-
-
-
+    @Test
+    public void When_PowerScore_has_incorrectCount_is_greater_than_one_and_correctCount_is_greater_than_one () throws ModelException {
+        GameScore puntaje= new PowerScore();
+        int score= puntaje.calculateScore(2,2);
+        Assert.assertEquals(score,14);
+    }
 }
