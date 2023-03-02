@@ -14,7 +14,9 @@ public class PowerScore implements GameScore {
 
     @Override
     public int calculateScore(int correctCount, int incorrectCount)throws ModelException{
-        if(correctCount < 0 || incorrectCount < 0)throw new ModelException(ModelException.NUMERO_NEGATIVO);
+        if(correctCount < 0 || incorrectCount < 0){
+            throw new ModelException(" Numero de incorrectas o correctas menor a 0 ");
+        }
         else{
             int puntaje = 0;
             for(int i=0; i<correctCount;i++){

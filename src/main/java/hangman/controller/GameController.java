@@ -26,6 +26,7 @@ import hangman.GUI;
 import hangman.SwingProject;
 import hangman.model.GameModel;
 import hangman.model.Language;
+import hangman.model.ModelException;
 import hangman.view.GamePanel;
 
 public class GameController{
@@ -60,7 +61,13 @@ public class GameController{
         for(JButton jb : panel.getKeyboardButtonArray()){
             jb.addActionListener((ActionEvent e) -> {
                 jb.setEnabled(false);
-                ArrayList<Integer> positions = model.makeGuess(jb.getText());
+                ArrayList<Integer> positions = new ArrayList<>();
+                try {
+                    positions = model.makeGuess(jb.getText());
+                } catch (ModelException e1) {
+                    // TODO Auto-generated catch block
+                    e1.printStackTrace();
+                }
                 for(int pos : positions){
                     panel.getBlanksArrayList().get(pos).setLetter(jb.getText());
                     panel.getBlanksArrayList().get(pos).repaint();
